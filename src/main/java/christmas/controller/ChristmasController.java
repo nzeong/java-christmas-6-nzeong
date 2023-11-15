@@ -14,6 +14,7 @@ public class ChristmasController {
     private int date;
     private List<Menu> orders;
     private int totalOrderPrice = 0;
+    private int totalSales = 0;
     private boolean checkGift = false;
 
     public void run() {
@@ -23,7 +24,22 @@ public class ChristmasController {
         calculateTotalOrderPrice(orders);
         printTotalOrderPrice(totalOrderPrice);
         printGift(checkGift());
-        printSales(getChristmasSales(), getWeekdaysSales(), getWeekendSales(), getStarSales(), checkGift);
+        getSales();
+    }
+
+    private void getSales(){
+        int christmasSales = getChristmasSales();
+        int weekdaysSales = getWeekdaysSales();
+        int weekendSales = getWeekendSales();
+        int starSales = getStarSales();
+
+        totalSales = christmasSales + weekdaysSales + weekendSales + starSales;
+        if (checkGift){
+            totalSales += 25000;
+        }
+
+        printSales(christmasSales, weekdaysSales, weekendSales, starSales, checkGift);
+        printTotalSales(totalSales);
     }
 
     private void readDate() {

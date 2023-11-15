@@ -77,4 +77,10 @@ public class OutputView {
         }
     }
 
+    public static void printTotalSales(int sales) {
+        System.out.println("\n<총혜택 금액>");
+        System.out.println("-" + sales + "원");
+    }
+
+
 }
