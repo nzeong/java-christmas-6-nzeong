@@ -58,7 +58,7 @@ public class Validation {
 
     private static void checkInt(String input) {
         if (!input.matches("\\d+")) {
-            throw new IllegalArgumentException(NOT_NUMBER_INPUT.getMessage());
+            throw new IllegalArgumentException(INVALID_DATE.getMessage());
         }
     }
 
