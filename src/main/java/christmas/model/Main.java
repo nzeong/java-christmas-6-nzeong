@@ -1,5 +1,8 @@
 package christmas.model;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public enum Main {
     T_BONE_STEAK("티본스테이크", 55000),
     BBQ_RIB("바비큐립", 54000),
@@ -20,6 +23,15 @@ public enum Main {
 
     public int getPrice() {
         return price;
+    }
+
+    public static int getPriceByName(String name) {
+        Optional<Main> foundMain =
+                Stream.of(Main.values())
+                        .filter(main -> main.getItemName().equals(name))
+                        .findFirst();
+
+        return foundMain.map(main -> main.getPrice()).orElse(0);
     }
 
 }

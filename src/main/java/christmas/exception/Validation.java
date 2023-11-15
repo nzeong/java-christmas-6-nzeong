@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static christmas.exception.Exception.*;
+import static christmas.model.MenuGroup.DESERT;
+import static christmas.model.MenuGroup.EMPTY;
 
 
 public class Validation {
@@ -37,7 +39,7 @@ public class Validation {
     }
 
     private static String separateMenu(String input) {
-        if (!MenuGroup.hasMenu(input)) {
+        if (MenuGroup.findByName(input) == EMPTY) {
             throw new IllegalArgumentException(INVALID_MENU.getMessage());
         }
         return input;

@@ -1,5 +1,8 @@
 package christmas.model;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public enum Drink {
     ZERO_COLA("제로콜라", 3000),
     RED_WINE("레드와인", 60000),
@@ -19,5 +22,14 @@ public enum Drink {
 
     public int getPrice() {
         return price;
+    }
+
+    public static int getPriceByName(String name) {
+        Optional<Drink> foundDrink =
+                Stream.of(Drink.values())
+                        .filter(drink -> drink.getItemName().equals(name))
+                        .findFirst();
+
+        return foundDrink.map(drink -> drink.getPrice()).orElse(0);
     }
 }

@@ -14,9 +14,14 @@ public class OutputView {
         System.out.println("12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
         System.out.println("<주문 메뉴>");
 
-        for(int i = 0; i< orders.size(); i++){
+        for (int i = 0; i < orders.size(); i++) {
             System.out.println(orders.get(i).getName() + " " + orders.get(i).getCount() + "개");
         }
+    }
+
+    public static void printTotalOrderPrice(int price) {
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.println(price + "원");
     }
 
 }
