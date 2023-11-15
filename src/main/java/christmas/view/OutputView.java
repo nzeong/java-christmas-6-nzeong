@@ -24,4 +24,14 @@ public class OutputView {
         System.out.println(price + "원");
     }
 
+    public static void printGift(boolean checkGift){
+        System.out.println("\n<증정 메뉴>");
+        if(checkGift == true){
+            System.out.println("샴페인 1개");
+        }
+        if(checkGift == false){
+            System.out.println("없음");
+        }
+    }
+
 }

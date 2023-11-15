@@ -7,6 +7,7 @@ import christmas.view.OutputView;
 import java.util.List;
 
 import static christmas.model.MenuGroup.*;
+import static christmas.view.OutputView.printGift;
 import static christmas.view.OutputView.printTotalOrderPrice;
 
 public class ChristmasController {
@@ -14,6 +15,7 @@ public class ChristmasController {
     private int date;
     private List<Menu> orders;
     private int totalOrderPrice = 0;
+    private boolean checkGift = false;
 
     public void run() {
         readDate();
@@ -21,6 +23,7 @@ public class ChristmasController {
         printMenu(orders);
         calculateTotalOrderPrice(orders);
         printTotalOrderPrice(totalOrderPrice);
+        printGift(checkGift());
     }
 
     private void readDate() {
@@ -71,4 +74,12 @@ public class ChristmasController {
         }
         return 0;
     }
+
+    private boolean checkGift(){
+        if(totalOrderPrice > 120000){
+            checkGift = true;
+        }
+        return checkGift;
+    }
+
 }
