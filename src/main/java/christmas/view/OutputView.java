@@ -90,5 +90,9 @@ public class OutputView {
         System.out.println((totalOrderPrice - totalSales) + "원");
     }
 
+    public static void printEventBadge(String eventBadge){
+        System.out.println("\n<12월 이벤트 배지>");
+        System.out.println(eventBadge);
+    }
 
 }

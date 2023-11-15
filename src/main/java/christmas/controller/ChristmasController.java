@@ -16,6 +16,7 @@ public class ChristmasController {
     private int totalOrderPrice = 0;
     private int totalSales = 0;
     private boolean checkGift = false;
+    private String eventBadge = "없음";
 
     public void run() {
         readDate();
@@ -26,6 +27,8 @@ public class ChristmasController {
         printGift(checkGift());
         getSales();
         printPurchasePrice(totalOrderPrice, totalSales, checkGift);
+        giveEventBadge();
+        printEventBadge(eventBadge);
     }
 
     private void getSales(){
@@ -151,6 +154,16 @@ public class ChristmasController {
         return sales;
     }
 
-
+    private void giveEventBadge(){
+        if(totalSales>=5000){
+            eventBadge = "별";
+        }
+        if(totalSales>=10000){
+            eventBadge = "트리";
+        }
+        if(totalSales>=20000){
+            eventBadge = "산타";
+        }
+    }
 
 }
