@@ -25,6 +25,7 @@ public class ChristmasController {
         printTotalOrderPrice(totalOrderPrice);
         printGift(checkGift());
         getSales();
+        printPurchasePrice(totalOrderPrice, totalSales, checkGift);
     }
 
     private void getSales(){
@@ -149,5 +150,7 @@ public class ChristmasController {
         }
         return sales;
     }
+
+
 
 }

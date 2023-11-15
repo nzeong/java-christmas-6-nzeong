@@ -79,7 +79,15 @@ public class OutputView {
 
     public static void printTotalSales(int sales) {
         System.out.println("\n<총혜택 금액>");
-        System.out.println("-" + sales + "원");
+        System.out.println(sales + "원");
+    }
+
+    public static void printPurchasePrice(int totalOrderPrice, int totalSales, boolean checkGift){
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        if (checkGift){
+            totalSales -= 25000;
+        }
+        System.out.println((totalOrderPrice - totalSales) + "원");
     }
 
 
