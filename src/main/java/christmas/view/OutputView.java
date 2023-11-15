@@ -2,9 +2,16 @@ package christmas.view;
 
 import christmas.model.Menu;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OutputView {
+
+    public static String toDecimalFormat(int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedNumber = decimalFormat.format(number);
+        return formattedNumber;
+    }
 
     public static void printException(String message) {
         System.out.println(message);
@@ -21,7 +28,7 @@ public class OutputView {
 
     public static void printTotalOrderPrice(int price) {
         System.out.println("\n<할인 전 총주문 금액>");
-        System.out.println(price + "원");
+        System.out.println(toDecimalFormat(price) + "원");
     }
 
     public static void printGift(boolean checkGift) {
@@ -49,25 +56,25 @@ public class OutputView {
 
     public static void printChristmasSales(int sales) {
         if (sales != 0) {
-            System.out.println("크리스마스 디데이 할인: -" + sales + "원");
+            System.out.println("크리스마스 디데이 할인: -" + toDecimalFormat(sales) + "원");
         }
     }
 
     public static void printWeekdaysSales(int sales) {
         if (sales != 0) {
-            System.out.println("평일 할인: -" + sales + "원");
+            System.out.println("평일 할인: -" + toDecimalFormat(sales) + "원");
         }
     }
 
     public static void printWeekendSales(int sales) {
         if (sales != 0) {
-            System.out.println("주말 할인: -" + sales + "원");
+            System.out.println("주말 할인: -" + toDecimalFormat(sales) + "원");
         }
     }
 
     public static void printStarSales(int sales) {
         if (sales != 0) {
-            System.out.println("특별 할인: -" + sales + "원");
+            System.out.println("특별 할인: -" + toDecimalFormat(sales) + "원");
         }
     }
 
@@ -79,18 +86,18 @@ public class OutputView {
 
     public static void printTotalSales(int sales) {
         System.out.println("\n<총혜택 금액>");
-        System.out.println(sales + "원");
+        System.out.println("-" + toDecimalFormat(sales) + "원");
     }
 
-    public static void printPurchasePrice(int totalOrderPrice, int totalSales, boolean checkGift){
+    public static void printPurchasePrice(int totalOrderPrice, int totalSales, boolean checkGift) {
         System.out.println("\n<할인 후 예상 결제 금액>");
-        if (checkGift){
+        if (checkGift) {
             totalSales -= 25000;
         }
-        System.out.println((totalOrderPrice - totalSales) + "원");
+        System.out.println(toDecimalFormat(totalOrderPrice - totalSales) + "원");
     }
 
-    public static void printEventBadge(String eventBadge){
+    public static void printEventBadge(String eventBadge) {
         System.out.println("\n<12월 이벤트 배지>");
         System.out.println(eventBadge);
     }
