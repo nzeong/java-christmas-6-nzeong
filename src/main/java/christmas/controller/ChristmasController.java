@@ -7,8 +7,7 @@ import christmas.view.OutputView;
 import java.util.List;
 
 import static christmas.model.MenuGroup.*;
-import static christmas.view.OutputView.printGift;
-import static christmas.view.OutputView.printTotalOrderPrice;
+import static christmas.view.OutputView.*;
 
 public class ChristmasController {
 
@@ -24,6 +23,7 @@ public class ChristmasController {
         calculateTotalOrderPrice(orders);
         printTotalOrderPrice(totalOrderPrice);
         printGift(checkGift());
+        printSales(getChristmasSales(), getWeekdaysSales(), getWeekendSales(), getStarSales(), checkGift);
     }
 
     private void readDate() {
@@ -44,12 +44,12 @@ public class ChristmasController {
         }
     }
 
-    private void printMenu(List<Menu> orders){
-        OutputView.printMenu(orders);
+    private void printMenu(List<Menu> orders) {
+        OutputView.printMenu(date, orders);
     }
 
-    private void calculateTotalOrderPrice(List<Menu> orders){
-        for(int i = 0; i< orders.size(); i++){
+    private void calculateTotalOrderPrice(List<Menu> orders) {
+        for (int i = 0; i < orders.size(); i++) {
             String name = orders.get(i).getName();
             int count = orders.get(i).getCount();
             int price = getOrderPrice(name);
@@ -59,27 +59,79 @@ public class ChristmasController {
         }
     }
 
-    private int getOrderPrice(String name){
-        if(MenuGroup.findByName(name) == APPETIZER){
+    private int getOrderPrice(String name) {
+        if (MenuGroup.findByName(name) == APPETIZER) {
             return Appetizer.getPriceByName(name);
         }
-        if(MenuGroup.findByName(name) == DESERT){
+        if (MenuGroup.findByName(name) == DESERT) {
             return Desert.getPriceByName(name);
         }
-        if(MenuGroup.findByName(name) == DRINK){
+        if (MenuGroup.findByName(name) == DRINK) {
             return Drink.getPriceByName(name);
         }
-        if(MenuGroup.findByName(name) == MAIN){
+        if (MenuGroup.findByName(name) == MAIN) {
             return Main.getPriceByName(name);
         }
         return 0;
     }
 
-    private boolean checkGift(){
-        if(totalOrderPrice > 120000){
+    private boolean checkGift() {
+        if (totalOrderPrice > 120000) {
             checkGift = true;
         }
         return checkGift;
+    }
+
+    private int getChristmasSales() {
+        int sales = 0;
+        if (date < 26) {
+            sales = 1000 + (date - 1) * 100;
+        }
+        return sales;
+    }
+
+    private int getWeekdaysSales() {
+        int sales = 0;
+        if (date % 7 == 3 || date % 7 == 4 || date % 7 == 5 || date % 7 == 6 || date % 7 == 0) {
+            sales = calculateWeekdaysSales(sales);
+        }
+        return sales;
+    }
+
+    private int calculateWeekdaysSales(int sales) {
+        for (Menu order : orders) {
+            String name = order.getName();
+            int count = order.getCount();
+            if (MenuGroup.findByName(name) == DESERT)
+                sales = 2023 * count;
+        }
+        return sales;
+    }
+
+    private int getWeekendSales() {
+        int sales = 0;
+        if (date % 7 == 1 || date % 7 == 2) {
+            sales = calculateWeekendSales(sales);
+        }
+        return sales;
+    }
+
+    private int calculateWeekendSales(int sales) {
+        for (Menu order : orders) {
+            String name = order.getName();
+            int count = order.getCount();
+            if (MenuGroup.findByName(name) == MAIN)
+                sales = 2023 * count;
+        }
+        return sales;
+    }
+
+    private int getStarSales() {
+        int sales = 0;
+        if (date % 7 == 3 || date == 25) {
+            sales += 1000;
+        }
+        return sales;
     }
 
 }

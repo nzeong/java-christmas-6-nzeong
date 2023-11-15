@@ -10,12 +10,12 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printMenu(List<Menu> orders) {
-        System.out.println("12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+    public static void printMenu(int date, List<Menu> orders) {
+        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
         System.out.println("<주문 메뉴>");
 
-        for (int i = 0; i < orders.size(); i++) {
-            System.out.println(orders.get(i).getName() + " " + orders.get(i).getCount() + "개");
+        for (Menu order : orders) {
+            System.out.println(order.getName() + " " + order.getCount() + "개");
         }
     }
 
@@ -24,13 +24,56 @@ public class OutputView {
         System.out.println(price + "원");
     }
 
-    public static void printGift(boolean checkGift){
+    public static void printGift(boolean checkGift) {
         System.out.println("\n<증정 메뉴>");
-        if(checkGift == true){
+        if (checkGift) {
             System.out.println("샴페인 1개");
         }
-        if(checkGift == false){
+        if (!checkGift) {
             System.out.println("없음");
+        }
+    }
+
+    public static void printSales(int christmasSales, int weekdaysSales, int weekendSales, int starSales, boolean giftSales) {
+        System.out.println("\n<혜택 내역>");
+        if (christmasSales == 0 && weekdaysSales == 0 && weekendSales == 0 && starSales == 0 && giftSales == false) {
+            System.out.println("없음");
+        }
+
+        printChristmasSales(christmasSales);
+        printWeekdaysSales(weekdaysSales);
+        printWeekendSales(weekendSales);
+        printStarSales(starSales);
+        printGiftSales(giftSales);
+    }
+
+    public static void printChristmasSales(int sales) {
+        if (sales != 0) {
+            System.out.println("크리스마스 디데이 할인: -" + sales + "원");
+        }
+    }
+
+    public static void printWeekdaysSales(int sales) {
+        if (sales != 0) {
+            System.out.println("평일 할인: -" + sales + "원");
+        }
+    }
+
+    public static void printWeekendSales(int sales) {
+        if (sales != 0) {
+            System.out.println("주말 할인: -" + sales + "원");
+        }
+    }
+
+    public static void printStarSales(int sales) {
+        if (sales != 0) {
+            System.out.println("특별 할인: -" + sales + "원");
+        }
+    }
+
+    public static void printGiftSales(boolean checkGift) {
+        if (checkGift) {
+            System.out.println("증정 이벤트: -25,000원");
         }
     }
 
